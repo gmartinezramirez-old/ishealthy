@@ -40,6 +40,21 @@ public class Food {
         mIsHealthy = healthy;
     }
 
+    public String getTitle(Context ctx) {
+        if (!mIsFood) {
+            return ctx.getString(R.string.not_a_food);
+        }
+        if (mIsHealthy) {
+            return ctx.getString(R.string.healthy);
+        } else {
+            return ctx.getString(R.string.junk);
+        }
+    }
+
+    public String getPhotoFilename() {
+        return "IMG_" + getId().toString() + ".jpg";
+    }
+
     public UUID getId() {
         return mId;
     }
