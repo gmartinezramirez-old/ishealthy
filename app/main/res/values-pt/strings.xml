@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Healthy Food</string>
+    <string name="healthy">HEALTHY FOOD</string>
+    <string name="junk">JUNK FOOD</string>
+    <string name="not_a_food">¿Is this a Food? Please Retry</string>
+    <string name="no_foods">Click on the camera icon to add a new Food</string>
+    <string name="progress_dialog">"Analyzing photo. \n\nPlease wait…"</string>
+    <string name="api_error">Error trying to communicate with the server</string>
+    <string name="retry_btn">RETRY</string>
+    <string name="menu_about">About</string>
+    <string name="dialog_about">Developed by:\n\nGonzalo Martinez\gonzalo.martinez.ra@gmail.com</string>
+</resources>
