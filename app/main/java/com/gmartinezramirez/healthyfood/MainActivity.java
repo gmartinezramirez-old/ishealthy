@@ -39,6 +39,11 @@ import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
@@ -110,6 +115,23 @@ public class MainActivity extends AppCompatActivity {
             }
 
             callAPI();
+        }
+    }
+
+    private void callAPI() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(CustomVisionAPI.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        byte[] imageBytes;
+        try {
+            imageBytes = PictureUtils.FileToBytes(mFoodLab.getPhotoFile(mFood));
+        } catch (IOException e) {
+            e.printStackTrace();
+            mDialog.dismiss();
+            printError();
+            return;
         }
     }
 
