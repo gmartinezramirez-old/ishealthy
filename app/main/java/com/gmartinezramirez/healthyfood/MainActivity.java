@@ -39,11 +39,6 @@ import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
@@ -116,63 +111,6 @@ public class MainActivity extends AppCompatActivity {
 
             callAPI();
         }
-    }
-
-    private void callAPI() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(CustomVisionAPI.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        CustomVisionAPI api = retrofit.create(CustomVisionAPI.class);
-
-        byte[] imageBytes;
-        try {
-            imageBytes = PictureUtils.FileToBytes(mFoodLab.getPhotoFile(mFood));
-        } catch (IOException e) {
-            e.printStackTrace();
-            mDialog.dismiss();
-            printError();
-            return;
-        }
-
-        RequestBody requestBody = RequestBody.create(MediaType.parse(CustomVisionAPI.OCTET_STREAM), imageBytes);
-        Call<CustomVisionResponse> call = api.sendImage(CustomVisionAPI.PREDICTION_KEY, CustomVisionAPI.OCTET_STREAM, requestBody);
-        call.enqueue(new Callback<CustomVisionResponse>() {
-            @Override
-            public void onResponse(Call<CustomVisionResponse> call, Response<CustomVisionResponse> response) {
-                CustomVisionPrediction firstPrediction;
-                CustomVisionPrediction secondPrediction;
-
-                try {
-                    firstPrediction = response.body().getPredictions().get(0);
-                    secondPrediction = response.body().getPredictions().get(0);
-                } catch (NullPointerException ex) {
-                    onFailure(call, ex);
-                    return;
-                }
-
-                Log.i("CustomVision", "Prediction Tag: " + firstPrediction.getTag());
-                Log.i("CustomVision", "Prediction Probability: " + firstPrediction.getProbability().toString());
-                Log.i("CustomVision", "Prediction Tag: " + secondPrediction.getTag());
-                Log.i("CustomVision", "Prediction Probability: " + secondPrediction.getProbability().toString());
-
-                Boolean isFood = !(firstPrediction.getProbability() <= 0.05 && secondPrediction.getProbability() <= 0.05);
-                Boolean isHealthy = firstPrediction.getTag().equals("healthy");
-                mFood.setFood(isFood);
-                mFood.setHealthy(isHealthy);
-                mFoodLab.addFood(mFood);
-                updateUI();
-
-                mDialog.dismiss();
-            }
-
-            @Override
-            public void onFailure(Call<CustomVisionResponse> call, Throwable t) {
-                mDialog.dismiss();
-                printError();
-            }
-        });
     }
 
     private void printError() {
@@ -297,6 +235,7 @@ public class MainActivity extends AppCompatActivity {
             if (!food.isFood()) {
                 return;
             }
+
             if (food.isHealthy()) {
                 mTitleTextView.setTextColor(getResources().getColor(R.color.healthyText));
             } else {
