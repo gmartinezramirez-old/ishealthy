@@ -82,8 +82,8 @@ public class PictureUtils {
         }
     }
 
+    //TODO: clean code of getScaledBitmap method
     public static Bitmap getScaledBitmap(String path, int destWidth, int destHeight) {
-
         // Read in the dimensions of the image on disk
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -93,6 +93,7 @@ public class PictureUtils {
         float srcWidth = options.outWidth;
         float srcHeight = options.outHeight;
 
+        //TODO: Create a separate method to do this
         // Figure out how much to scale down by
         int inSampleSize = 1;
         if (srcHeight > destHeight || srcWidth > destWidth) {
@@ -104,15 +105,12 @@ public class PictureUtils {
         options = new BitmapFactory.Options();
         options.inSampleSize = inSampleSize;
 
-        // Read in and create final bitmap
         return BitmapFactory.decodeFile(path, options);
     }
 
     public static Bitmap getScaledBitmap(String path, Activity activity) {
         Point size = new Point();
-
         activity.getWindowManager().getDefaultDisplay().getSize(size);
-
         return getScaledBitmap(path, size.x, size.y);
     }
 }
