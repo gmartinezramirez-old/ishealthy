@@ -53,7 +53,6 @@ public class FoodLab {
 
     public Food getFood(UUID id) {
         String[] args = { id.toString() };
-
         try (FoodCursorWrapper cursor = queryFoods(FoodTable.Cols.UUID + " = ?", args, null)) {
             if (cursor.getCount() == 0) {
                 return null;
@@ -73,15 +72,26 @@ public class FoodLab {
         return new File(filesDir, food.getPhotoFilename());
     }
 
+    /* 
+     * query:
+     *    * Name of the table
+     *    * Columns
+     *    * whereClause
+     *    * whereArgs 
+     *    * GroupBy
+     *    * Having 
+     *    * Orderby
+     *
+    */
     private FoodCursorWrapper queryFoods(String whereClause, String[] whereArgs, String orderArgs) {
         Cursor cursor = mDatabase.query(
                 FoodTable.NAME,
-                null, // columns - null selects all columns
+                null,
                 whereClause,
                 whereArgs,
-                null, // groupBy
-                null, // having
-                orderArgs // orderBy
+                null,
+                null,
+                orderArgs
         );
         return new FoodCursorWrapper(cursor);
     }

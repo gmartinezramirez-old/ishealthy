@@ -40,14 +40,14 @@ public class Food {
         mIsHealthy = healthy;
     }
 
-    public String getTitle(Context ctx) {
+    public String getTitle(Context context) {
         if (!mIsFood) {
-            return ctx.getString(R.string.not_a_food);
+            return context.getString(R.string.not_a_food);
         }
         if (mIsHealthy) {
-            return ctx.getString(R.string.healthy);
+            return context.getString(R.string.healthy);
         } else {
-            return ctx.getString(R.string.junk);
+            return context.getString(R.string.junk);
         }
     }
 
