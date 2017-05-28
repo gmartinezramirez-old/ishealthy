@@ -200,7 +200,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateUI() {
         mFoods = mFoodLab.getFoods();
-
         mEmptyView = (TextView) findViewById(R.id.no_foods);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
@@ -280,7 +279,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class FoodHolder extends RecyclerView.ViewHolder {
-
         private ImageView mImageView;
         private TextView mTitleTextView;
 
@@ -308,7 +306,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class FoodAdapter extends RecyclerView.Adapter<FoodHolder> {
-
         private List<Food> mFoods;
 
         public FoodAdapter(List<Food> foods) {
