@@ -21,6 +21,8 @@
 
 ![](http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)
 ![](https://img.shields.io/badge/documentation-etc-red.svg?style=flat-square)
+![stability-stable](https://img.shields.io/badge/stability-stable-green.svg)
+<a href="http://www.repostatus.org/#unsupported"><img src="http://www.repostatus.org/badges/latest/unsupported.svg" alt="Project Status: Unsupported – The project has reached a stable, usable state but the author(s) have ceased all work on it. A new maintainer may be desired." /></a>
 
 ## Features
 Use Microsoft Computer Vision API
